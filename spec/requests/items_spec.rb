@@ -3,10 +3,10 @@ require 'rails_helper'
 
 RSpec.describe 'Items API' do
   # Initialize the test data
-  let!(:todo) { create(:todo) }
-  let!(:items) { create_list(:item, 20, todo_id: todo.id) }
+  let!(:todo)   { create(:todo) }
+  let!(:items)  { create_list(:item, 20, todo_id: todo.id) }
   let(:todo_id) { todo.id }
-  let(:id) { items.first.id }
+  let(:id)      { items.first.id }
 
   # Test suite for GET /todos/:todo_id/items
   describe 'GET /todos/:todo_id/items' do
@@ -18,7 +18,7 @@ RSpec.describe 'Items API' do
       end
 
       it 'returns all todo items' do
-        expect(json.size).to eq(20)
+        expect(json['data'].size).to eq(20)
       end
     end
 
@@ -45,7 +45,7 @@ RSpec.describe 'Items API' do
       end
 
       it 'returns the item' do
-        expect(json['id']).to eq(id)
+        expect(json['data']['id'].to_i).to eq(id)
       end
     end
 

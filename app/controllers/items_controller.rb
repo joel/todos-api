@@ -4,18 +4,18 @@ class ItemsController < ApplicationController
 
   # GET /todos/:todo_id/items
   def index
-    json_response(@todo.items)
+    json_response(relation: @todo.items, is_collection: true)
   end
 
   # GET /todos/:todo_id/items/:id
   def show
-    json_response(@item)
+    json_response(relation: @item)
   end
 
   # POST /todos/:todo_id/items
   def create
-    @todo.items.create!(item_params)
-    json_response(@todo, :created)
+    item = @todo.items.create!(item_params)
+    json_response(relation: item, status: :created)
   end
 
   # PUT /todos/:todo_id/items/:id

@@ -3,19 +3,18 @@ class TodosController < ApplicationController
 
   # GET /todos
   def index
-    @todos = Todo.all
-    json_response(@todos)
+    json_response(relation: Todo.all, is_collection: true)
   end
 
   # POST /todos
   def create
-    @todo = Todo.create!(todo_params)
-    json_response(@todo, :created)
+    todo = Todo.create!(todo_params)
+    json_response(relation: todo, status: :created)
   end
 
   # GET /todos/:id
   def show
-    json_response(@todo)
+    json_response(relation: @todo)
   end
 
   # PUT /todos/:id
