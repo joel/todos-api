@@ -45,7 +45,7 @@ RSpec.describe 'Items API' do
       end
 
       it 'returns the item' do
-        expect(json['data']['id'].to_i).to eq(id)
+        expect(json['data']['id']).to eq(id)
       end
     end
 
