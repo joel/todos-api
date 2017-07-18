@@ -1,25 +1,36 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
-default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+common: &default_settings
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  pool: 100
+  username: postgres_default_user
+  password: secret
+  host: localhost
   timeout: 5000
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  <<: *default_settings
+  database: todo_api_sample_development
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: db/test.sqlite3
+  <<: *default_settings
+  database: todo_api_sample_test
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  <<: *default_settings
+  database: todo_api_sample_development
+
+# # Add User
+# createuser -D -A -P postgres_default_user
+# # Remove
+# dropdb -e todo_api_sample_development
+# # Add Database
+# createdb -O postgres_default_user -E UTF8 todo_api_sample_development
+# # Verification
+# psql -U postgres_default_user -d todo_api_sample_development
+# Grant user, connect to PGSL with root or granted user
+# psql todo_api_sample_development
+# ALTER USER postgres_default_user CREATEDB;
+
+# psql template1
+# alter role postgres_default_user with superuser;
