@@ -1,0 +1,9 @@
+* http://jsonapi-resources.com/
+* https://github.com/fotinakis/jsonapi-serializers
+* https://scotch.io/tutorials/build-a-restful-json-api-with-rails-5-part-one
+* http://girders.org/blog/2016/08/26/building-rails-apis-with-jsonapi-and-jsonapi-resources/
+* ActiveModel::Serializer::Adapter::JsonApi::Deserialization.parse(params.to_h)
+* https://stackoverflow.com/questions/32491360/deserializing-json-api-with-rails-strong-parameters
+* ActiveModelSerializers::Deserialization.jsonapi_parse(params)
+* https://github.com/tiagopog/jsonapi-utils
+* https://github.com/cerebris/jsonapi-resources/issues/354

@@ -8,7 +8,8 @@ class TodosController < ApplicationController
 
   # POST /todos
   def create
-    todo = Todo.create!(todo_params)
+    puts("params : #{params}")
+    todo = Todo.create!(todo_attributes)
     json_response(relation: todo, status: :created)
   end
 
@@ -19,7 +20,7 @@ class TodosController < ApplicationController
 
   # PUT /todos/:id
   def update
-    @todo.update(todo_params)
+    @todo.update(todo_attributes)
     head :no_content
   end
 
@@ -31,9 +32,16 @@ class TodosController < ApplicationController
 
   private
 
-  def todo_params
-    # whitelist params
-    params.permit(:title, :created_by)
+  # def todo_params
+  #   # whitelist params
+  #   # params.permit(:title, :created_by)
+  #   params
+  # end
+
+  def todo_attributes
+    params.require(:data)
+          .require(:attributes)
+          .permit(:title, :created_by)
   end
 
   def set_todo
