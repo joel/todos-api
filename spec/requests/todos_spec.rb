@@ -57,7 +57,7 @@ RSpec.describe 'Todos API', type: :request do
       { "data": {
           "attributes": {
             "title": "Bucket List",
-            "created_by": "John Doe"
+            "created-by": "John Doe"
           },
           "type": "todos"
         }
