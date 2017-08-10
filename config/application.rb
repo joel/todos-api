@@ -16,6 +16,8 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# require "active_model_serializers"
+
 module TodosApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

@@ -53,7 +53,6 @@ RSpec.describe 'Todos API', type: :request do
   # Test suite for POST /todos
   describe 'POST /todos', focus: true do
     # valid payload
-    # let(:valid_attributes) { { title: 'Learn Elm', created_by: '1' } }
     let(:valid_attributes) do
       { "data": {
           "attributes": {
@@ -78,15 +77,25 @@ RSpec.describe 'Todos API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/todos', params: { title: 'Foobar' } }
+      context 'bad params' do
+        let(:attributes) do
+          { "data": {
+              "attributes": {
+                "title": "Bucket List"
+              },
+              "type": "todos"
+            }
+          }
+        end
+        before { post '/todos', params: attributes }
 
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
-      end
+        it 'returns status code 422' do
+          expect(response).to have_http_status(422)
+        end
 
-      it 'returns a validation failure message' do
-        expect(response.body)
-          .to match(/param is missing or the value is empty/)
+        it 'returns a validation failure message' do
+          expect(json).to eql({"message" => "Validation failed: Created by can't be blank"})
+        end
       end
     end
   end
