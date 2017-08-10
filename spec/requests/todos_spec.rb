@@ -51,7 +51,7 @@ RSpec.describe 'Todos API', type: :request do
   end
 
   # Test suite for POST /todos
-  describe 'POST /todos', focus: true do
+  describe 'POST /todos' do
     # valid payload
     let(:valid_attributes) do
       { "data": {
@@ -102,17 +102,26 @@ RSpec.describe 'Todos API', type: :request do
 
   # Test suite for PUT /todos/:id
   describe 'PUT /todos/:id' do
-    let(:valid_attributes) { { title: 'Shopping' } }
+    let(:valid_attributes) do
+      { "data": {
+          "attributes": {
+            "title": "Shopping"
+          },
+          "type": "todos"
+        }
+      }
+    end
 
     context 'when the record exists' do
-      before { put "/todos/#{todo_id}", params: valid_attributes }
+      subject { put "/todos/#{todo_id}", params: valid_attributes }
 
       it 'updates the record' do
+        expect {
+          expect(subject).to eql(204)
+        }.to change {
+          Todo.find(todo_id).title
+        }.to('Shopping')
         expect(response.body).to be_empty
-      end
-
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
       end
     end
   end
