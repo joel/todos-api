@@ -62,9 +62,25 @@ RSpec.describe 'Items API' do
     end
   end
 
-  # Test suite for PUT /todos/:todo_id/items
-  describe 'POST /todos/:todo_id/items' do
-    let(:valid_attributes) { { name: 'Visit Narnia', done: false } }
+  # Test suite for POST /todos/:todo_id/items
+  describe 'POST /todos/:todo_id/items', focus: true do
+    # let(:valid_attributes) { { name: 'Visit Narnia', done: false } }
+    let(:valid_attributes) do
+      {
+        "data": {
+          "type" => 'items',
+          "attributes" => {
+            "name" => "Tricycle",
+            "done" => false
+          },
+          "relationships": {
+            "todo": {
+              "data": { "type": "todos", "id": todo_id }
+            }
+          }
+        }
+      }
+    end
 
     context 'when request attributes are valid' do
       before { post "/todos/#{todo_id}/items", params: valid_attributes }

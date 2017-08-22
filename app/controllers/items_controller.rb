@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.permit(:name, :done)
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params)
   end
 
   def set_todo

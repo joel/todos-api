@@ -15,6 +15,7 @@ class TodosController < ApplicationController
   # GET /todos/:id
   def show
     json_response(relation: @todo)
+    # render json: JSONAPI::Serializer.serialize(@todo, include: ['items']), status: :ok
   end
 
   # PUT /todos/:id
